@@ -22,7 +22,7 @@ const Nav = () => {
             <Link to="/cart" className='relative flex items-center space-x-1 hover:text-gray-300' >
             <ShoppingCart size={24} />
             {cart.length  > 0 && (
-                <span className='absolute -top-2 -right-2 bg-yellow-500 text-xs text-black rounded-full w-5 h-5 flex items-center justify-center animate-bounce'>
+                <span className='absolute -top-2 -right-2 bg-green-500 text-xs text-black rounded-full w-5 h-5 flex items-center justify-center animate-bounce'>
                     {cart.length}
                 </span>
             )}

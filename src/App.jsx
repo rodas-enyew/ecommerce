@@ -13,14 +13,13 @@ const App = () => {
   return (
     <div className='flex flex-col min-h-screen'>
       <Nav/>
-      <div className='flex flex-1'>
+      
+      {/*<div className='flex flex-1'>
         {location.pathname === '/' && (
-          <aside className='w-64 p-4 hidden md:block'>
-          <Filter/>
+          {/*<aside className='w-64 p-4 hidden md:block'>
         </aside>
-        )}
+        )} */}
 
-        
         <main className='flex-1 p-4'>
           <Routes> {/*path + component rendered*/}
             <Route path='/' element= {<Home/>} />
@@ -30,8 +29,8 @@ const App = () => {
           {/* makes nav and filter stay on all pages */}
         </main>
       </div>
-    </div>
+   
   );
-};
+}
 
 export default App

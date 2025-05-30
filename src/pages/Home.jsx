@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState }  from 'react';
 import Card from '../components/Card';
-import CartPage from './CartPage';
+import Filter from '../components/Filter';
 
 
 
@@ -9,9 +9,11 @@ const Home = () => {
     const [products, setProducts] = useState([]);
     const [loading , setLoading] = useState(false);
     const [page, setPage] = useState(1);
-    const productsPerPage = 10;
+    const [categories, setCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [searchTerm, setSearchterm] = useState([]);
 
-   
+    const productsPerPage = 10;
 
     const fetchProducts = async () => {
         setLoading(true);
@@ -19,6 +21,9 @@ const Home = () => {
             const response = await fetch('https://dummyjson.com/products');
             const data = await response.json(); 
             setProducts(data.products);
+
+            const uniqueCategories = [...new Set(data.products.map(p => p.category))];
+            setCategories(uniqueCategories);
         } catch (err) {
             console.error("Faild to fetch products:", err);
         } finally {
@@ -30,21 +35,54 @@ const Home = () => {
         fetchProducts();
     }, []);
 
+    //toggle selected category
+  const toggleCategory = (category) => {
+    setSelectedCategories(prev => 
+        prev.includes(category)
+        ? prev.filter(cat => cat !== category)
+        : [...prev, category]
+    );
+    setPage(1);
+  } 
 
+    //filter products bt selected categories
+
+    const filteredProducts = selectedCategories.length > 0 
+    ? products.filter(p => selectedCategories.includes(p.category))
+    : products;
+
+    
+
+
+// page related
     const indexOfLast = page * productsPerPage;
     const indexOfFirst = indexOfLast - productsPerPage;
-    const currentProducts = products.slice(indexOfFirst, indexOfLast);
 
+    const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast);
     const totalPages = Math.ceil(products.length/ productsPerPage);
-
+    
 
     return ( 
     <div>
-       <h2 className='text-xl font-semibold mb-4'> Product List </h2>
+       
 
+       <div className='flex gap-6'>
+        {/*filter left*/}
+        <div className='w-1/4'>
+       <Filter
+       categories={categories}
+       selectedCategories={selectedCategories}
+       toggleCategory={toggleCategory}
+       />
+       </div>
+
+       {/*producct to the right*/}
+
+       <div className='w-5/4'>
+               <h3 className='text-2xl font-bold mb-8'> Product List </h3>
        {loading ? (
-        <div className='flex justfy-center items-center text-white h-40'>
-            <svg className='h-8 2-8 text-blue-500' xmlns="https://www.w3.org/200.svg" fill="none" viewbox="0 0 24 24">
+        <div className='flex justfy-center items-center h-40'>
+            <svg className='h-8 w-8 text-blue-500 animate-spin' xmlns="https://www.w3.org/200.svg" fill="none" viewbox="0 0 24 24">
             <circle className='opacity-25' cs="12" cy="12" r="10" stroke="currentcolor" strokeWidth="4"></circle>
             <path className='opacity-75' file="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
             </svg>
@@ -58,7 +96,7 @@ const Home = () => {
             ))}
         </div>
 
-        <div className='flex justify-center mt-6 gap-4 text-black'>
+        <div className='flex justify-center mt-6 gap-4'>
             <button
             disabled={page ===1}
             onClick={() => setPage(page - 1)}
@@ -89,6 +127,8 @@ const Home = () => {
         </> 
 
        )}
+       </div>
+    </div>
     </div>
     );
 };
