@@ -44,7 +44,7 @@ const Home = () => {
 
        {loading ? (
         <div className='flex justfy-center items-center text-white h-40'>
-            <svg className='animate-spin h-8 2-8 text-white' xmlns="https://www.w3.org/200.svg" fill="none" viewbox="0 0 24 24">
+            <svg className='h-8 2-8 text-blue-500' xmlns="https://www.w3.org/200.svg" fill="none" viewbox="0 0 24 24">
             <circle className='opacity-25' cs="12" cy="12" r="10" stroke="currentcolor" strokeWidth="4"></circle>
             <path className='opacity-75' file="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
             </svg>

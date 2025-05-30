@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from '../context/CartContext'
 import { Star } from 'lucide-react';
 
@@ -8,17 +8,17 @@ import { Star } from 'lucide-react';
 const Card = ({product}) => {
     const { addToCart, removeFromCart, isInCart } = useCart();
     const inCart = isInCart(product.id);
+    const navigate = useNavigate();
 
     const handleCartToggle = (e) => {
-        e.preventDefault(); //prevents link nav
+        //e.preventDefault(); //prevents link nav
         e.stopPropagation(); //stops bubbling
         console.log('Button clicked');
         inCart ? removeFromCart(product.id) : addToCart(product);
     };
 
     const handleCardClick = () => {
-        navigate (`/product/${product.id}`);
-        <Card product={product}/>
+        navigate(`/product/${product.id}`);
     }
 
 
@@ -26,7 +26,6 @@ const Card = ({product}) => {
         <div className="border border-gray-300 rounded-lg p-4 flex flex-col items-center text hover:shadow-lg hover:bg-gray-200 transition"
         onClick={handleCardClick}
         >
-
 
                <img 
                src={product.thumbnail} 
@@ -45,12 +44,11 @@ const Card = ({product}) => {
                 <Star size={16} className='mr-1' />
                 {product.rating}
                </div>
-
            
             <button 
             onClick={handleCartToggle}
             className={`mt-3 px-3 py-1 rounded transition ${
-                inCart ? "bg-red-400 hover:bg-red-600" : "bg-blue-400 hover:bg-blue-600"
+                inCart ? "bg-red-500 hover:bg-red-700" : "bg-blue-400 hover:bg-blue-600"
             }`}
             >
                {inCart ? "Remove from Cart" : "Add to Cart"}
