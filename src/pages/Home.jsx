@@ -11,7 +11,7 @@ const Home = () => {
     const [page, setPage] = useState(1);
     const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [searchTerm, setSearchterm] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const productsPerPage = 10;
 
@@ -47,12 +47,16 @@ const Home = () => {
 
     //filter products bt selected categories
 
-    const filteredProducts = selectedCategories.length > 0 
-    ? products.filter(p => selectedCategories.includes(p.category))
-    : products;
+    const filteredProducts = products
+    .filter((p) => 
+        selectedCategories.length > 0 ? selectedCategories.includes(p.category): true
+    )
+
+    .filter((p) => 
+    p.title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
 
     
-
 
 // page related
     const indexOfLast = page * productsPerPage;
@@ -65,7 +69,6 @@ const Home = () => {
     return ( 
     <div>
        
-
        <div className='flex gap-6'>
         {/*filter left*/}
         <div className='w-1/4'>
@@ -73,6 +76,9 @@ const Home = () => {
        categories={categories}
        selectedCategories={selectedCategories}
        toggleCategory={toggleCategory}
+       searchTerm={searchTerm}
+       setSearchTerm={setSearchTerm}
+       handleResetFilters={handleResetFilters}
        />
        </div>
 
@@ -90,6 +96,7 @@ const Home = () => {
         </div>
        ): (
         <>
+
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
             {currentProducts.map(product => (
                 <Card key= {product.id} product={product}/>
