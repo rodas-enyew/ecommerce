@@ -64,6 +64,12 @@ const Home = () => {
 
     const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast);
     const totalPages = Math.ceil(products.length/ productsPerPage);
+
+    const handleResetFilters = () => {
+        setSelectedCategories([]);
+        setSearchTerm('');
+        setPage(1);
+    }
     
 
     return ( 
@@ -72,6 +78,7 @@ const Home = () => {
        <div className='flex gap-6'>
         {/*filter left*/}
         <div className='w-1/4'>
+
        <Filter
        categories={categories}
        selectedCategories={selectedCategories}
