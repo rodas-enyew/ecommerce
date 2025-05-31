@@ -79,7 +79,7 @@ const ProductPage = () => {
             <p className='mb-1 ml-3 font-medium'>Discount Percentage: {product.discountPercentage}</p>
             <p className='mb-1 ml-3 font-medium'>Min order quantity: {product.minimumOrderQuantity}</p>
             <p className='mb-1 ml-3 font-medium'>Sku: {product.sku}</p>
-            <p className='mb-1 ml-3 font-medium'>Tags: {product.tags}<p/>
+            <p className='mb-1 ml-3 font-medium'>Tags: {product.tags}/</p>
 
           </div>
 
