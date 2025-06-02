@@ -3,6 +3,7 @@ import { useEffect, useState }  from 'react';
 import Card from '../components/Card';
 import Filter from '../components/Filter';
 import Pagination from '../components/pagination';
+import Loading from '../components/Loading';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -83,10 +84,7 @@ useEffect(() => {
 
        <div className='w-5/4'>
                <h3 className='text-2xl font-bold mb-8'> Product List </h3>
-       {loading ? (
-        
-        <span className='ml-100 text-center text-blue-600'> loading... </span>
-       ): (
+       {loading ? <Loading/> : (
         <>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
             {currentProducts.map(product => (
@@ -100,7 +98,6 @@ useEffect(() => {
         onPageChange={setPage}
         />
         </> 
-
        )}
        </div>
     </div>
