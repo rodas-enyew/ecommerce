@@ -9,27 +9,16 @@ const Filter = ({
   handleResetFilters,
 }) => {
   return (
-    <aside className="w-full lg:w-64 bg-white p-4 rounded-xl shadow sticky top-4 h-fit">
-      {/* Search Bar */}
-      <div className="mb-6">
-        <h2 className=" font-semibold mb-2">Search</h2>
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-2 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-      </div>
-
+    <aside className="w-full lg:w-64 bg-white p-4 rounded-xl shadow sticky top-6 h-fit">
+      
       {/* Filters */}
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold mb-2">Filters</h2>
-        <ul className="space-y-2">
+      <div className="mb-9">
+        <h2 className="text-xl font-extrabold mb-6">Filters</h2>
+        <ul className="space-y-4">
           {categories.map((category) => (
             <li
               key={category}
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center font-bold gap-2 cursor-pointer"
               onClick={() => toggleCategory(category)}
             >
               <input

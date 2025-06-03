@@ -85,6 +85,15 @@ const Home = () => {
         {/*producct to the right*/}
 
         <div className="w-4/4">
+        <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-3xl px-2 py-2 border border-gray-300 rounded-xl focus:outline-2 focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
           <h3 className="text-2xl font-bold mb-6"> Product List </h3>
           {loading ? (
             <Loading />
