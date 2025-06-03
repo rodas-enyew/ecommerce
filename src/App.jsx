@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Nav from "./components/Nav";
-import Filter from "./components/Filter.jsx";
 import Home from "./pages/Home";
+import About from './pages/About';
+import Contact from './pages/Contact';
 import ProductPage from "./pages/ProductPage";
 import CartPage from './pages/CartPage';
 
@@ -13,16 +14,11 @@ const App = () => {
   return (
     <div className='flex flex-col min-h-screen'>
       <Nav/>
-      
-      {/*<div className='flex flex-1'>
-        {location.pathname === '/' && (
-          {/*<aside className='w-64 p-4 hidden md:block'>
-        </aside>
-        )} */}
-
         <main className='flex-1 p-4'>
           <Routes> {/*path + component rendered*/}
             <Route path='/' element= {<Home/>} />
+            <Route path='/about' element={<About/>}/>
+            <Route path='/contact' element={<Contact/>}/>
             <Route path='/product/:id' element= {<ProductPage/> } />
             <Route path='/cart' element= {<CartPage/>} />
           </Routes>

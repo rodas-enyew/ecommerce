@@ -61,7 +61,14 @@ const CartPage = () => {
 
           <div className="text-xl font-bold text-right mt-4">
             Total: ${total.toFixed(2)}
-          </div>
+          </div> 
+          <div>
+              <button
+            className="w-25 ml-187 py-1 rounded-2xl font-semibold text-white transition bg-green-600 hover:bg-green-700 cursor-pointer"
+            >
+              Purchase 
+            </button>
+            </div> 
         </div>
       )}
     </div>

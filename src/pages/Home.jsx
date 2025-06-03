@@ -13,7 +13,7 @@ const Home = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const productsPerPage = 10;
+  const productsPerPage = 10; //keeps the pagination logic clear
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -34,33 +34,33 @@ const Home = () => {
       }
     };
     fetchProducts();
-  }, []);
+  }, []); //'[]' to run only once
 
-  //toggle selected category
+  //manages the selection and deselection of product category filtering
   const toggleCategory = (category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((cat) => cat !== category)
-        : [...prev, category]
+    setSelectedCategories((prev) =>  //'prev' a param used to compute new state
+      prev.includes(category) //checks is this cat already selected or not
+        ? prev.filter((cat) => cat !== category) //if yes, remove from the list
+        : [...prev, category] //if no add it
     );
     setPage(1);
   };
 
-  //filter products bt selected categories
+  //filters products by selected categories
   const filteredProducts = products
     .filter((p) =>
-      selectedCategories.length > 0
-        ? selectedCategories.includes(p.category)
-        : true
+      selectedCategories.length > 0  
+        ? selectedCategories.includes(p.category) //if selectedCat is one or more include the products that match
+        : true     //if not return all the products
     )
     .filter((p) => p.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   // page related
-  const indexOfLast = page * productsPerPage;
-  const indexOfFirst = indexOfLast - productsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(products.length / productsPerPage);
-
+  const indexOfLast = page * productsPerPage;  //calculates last index of the prod on the current page
+  const indexOfFirst = indexOfLast - productsPerPage; //finds the first index
+  const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast); //returns from first up to but not including last
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage); // prevents empty pages from showing
+ 
   const handleResetFilters = () => {
     setSelectedCategories([]);
     setSearchTerm("");
@@ -69,7 +69,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="flex gap-6">
+      <div className="flex gap-5">
         {/*filter left*/}
         <div className="w-1/4">
           <Filter
@@ -84,8 +84,8 @@ const Home = () => {
 
         {/*producct to the right*/}
 
-        <div className="w-5/4">
-          <h3 className="text-2xl font-bold mb-8"> Product List </h3>
+        <div className="w-4/4">
+          <h3 className="text-2xl font-bold mb-6"> Product List </h3>
           {loading ? (
             <Loading />
           ) : (
@@ -94,8 +94,8 @@ const Home = () => {
 
               <Pagination
                 currentPage={page}
-                totalPages={totalPages}
-                onPageChange={setPage}
+                totalPages={totalPages} //num of pages based on filtered products
+                onPageChange={setPage} //updates the page when the user clicks another pge
               />
             </>
           )}

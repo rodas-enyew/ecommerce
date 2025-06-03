@@ -45,7 +45,8 @@ const Card = ({product}) => {
             <button 
             onClick={handleCartToggle}
             className={`w-60 mt-3  py-2 rounded-xl font-medium transition ${
-                inCart ? "bg-red-500 hover:bg-red-700" : "bg-blue-400 hover:bg-blue-600"
+                inCart ? "bg-red-500 hover:bg-red-700" 
+                       : "bg-blue-400 hover:bg-blue-600"
             }`}
             >
                {inCart ? "Remove from Cart" : "Add to Cart"}

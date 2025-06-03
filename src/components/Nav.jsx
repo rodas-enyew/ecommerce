@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import {ShoppingCart} from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
-
 const Nav = () => {
     const {cart} = useCart();
 
@@ -16,7 +15,7 @@ const Nav = () => {
       </Link>
 
       {/*Nav links*/}
-            <div className='space-x-70 hidden md:flex text-md font-bold '>
+            <div className='space-x-30 hidden md:flex text-md font-bold '>
                 <Link to="/about" className='hover:text-green-400 transition '> About </Link>
                 <Link to="/" className='hover:text-green-400 transition'> Home </Link>
                 <Link to="/contact" className='hover:text-green-400 transition'> Contact </Link>               
