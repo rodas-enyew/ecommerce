@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Filter = ({
   categories = [],
@@ -27,12 +27,14 @@ const Filter = ({
         <h2 className="text-lg font-semibold mb-2">Filters</h2>
         <ul className="space-y-2">
           {categories.map((category) => (
-            <li key={category} 
-            className="flex items-center gap-2">
+            <li
+              key={category}
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() => toggleCategory(category)}
+            >
               <input
                 type="checkbox"
                 checked={selectedCategories.includes(category)}
-                onChange={() => toggleCategory(category)}
                 className="accent-blue-500"
               />
               <span className="capitalize">{category}</span>
