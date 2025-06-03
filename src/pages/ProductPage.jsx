@@ -29,7 +29,7 @@ const ProductPage = () => {
 
     return (
 
-      <div className='max-w-7xl mx-auto p-3 grid grid-cols-1 md:grid-cols-2 gap-10 '>
+      <div className='max-w-8xl mx-38 p-3 grid md:grid-cols-2'>
         <img 
           src={product.thumbnail} 
           alt={product.title}
@@ -37,7 +37,7 @@ const ProductPage = () => {
         />
 
         {/*product info */}
-        <div  className='space-y-4 mr-9'>
+        <div  className='space-y-3'>
           <h2 className="text-3xl text-black font-bold ">{product.title}</h2>
           <p className="text-gray-700">{product.description}</p>
           <p className="text-xl text-gray-900 font-semibold">${product.price}</p>
@@ -47,7 +47,6 @@ const ProductPage = () => {
             <Star size={20} className="mr-1" />
             {product.rating}
           </div>
-
 
           <button
             onClick={() => {
@@ -75,7 +74,6 @@ const ProductPage = () => {
             <p className='mb-1 ml-3 font-medium'>Tags: {product.tags}/</p>
 
           </div>
-
       </div>
     )
 }

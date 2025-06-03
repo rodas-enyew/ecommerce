@@ -2,7 +2,12 @@ import React from 'react';
 import { useCart } from '../context/CartContext';
 
 const CartPage = () => {
-  const { cart, removeFromCart, updateQuantity } = useCart();
+  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
+
+  const handlePayNow = () => {
+    alert('Payment Successful! 🎊');
+    clearCart();
+  }
 
   const total = cart?.reduce((sum, item) => sum + item.price * item.quantity, 0) ?? 0;
 
@@ -63,12 +68,19 @@ const CartPage = () => {
             Total: ${total.toFixed(2)}
           </div> 
           <div>
-              <button
-            className="w-25 ml-187 py-1 rounded-2xl font-semibold text-white transition bg-green-600 hover:bg-green-700 cursor-pointer"
-            >
-              Purchase 
-            </button>
-            </div> 
+
+          <button
+            onClick={handlePayNow}
+            disabled={cart.length === 0}
+            className={`px-5 py-2 ml-187 rounded-xl font-semibold transition ${
+              cart.length === 0
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-green-500 hover:bg-green-600 text-white'
+            }`}
+          >
+            Pay Now
+          </button> 
+        </div>
         </div>
       )}
     </div>
