@@ -4,8 +4,6 @@ const Filter = ({
   categories = [],
   selectedCategories = [],
   toggleCategory,
-  searchTerm,
-  setSearchTerm,
   handleResetFilters,
 }) => {
   return (
