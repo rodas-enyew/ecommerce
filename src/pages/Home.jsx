@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Card from "../components/Card";
 import Filter from "../components/Filter";
 import Pagination from "../components/pagination";
 import Loading from "../components/Loading";
