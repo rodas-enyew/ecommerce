@@ -91,7 +91,7 @@ const Home = () => {
           placeholder="Search products..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-3xl px-2 py-2 border border-gray-300 rounded-xl focus:outline-2 focus:ring-2 focus:ring-blue-400"
+          className="w-3xl px-2 py-2 border border-gray-200 rounded-xl focus:outline-2 focus:ring-2 focus:ring-green-500"
         />
       </div>
           <h3 className="text-2xl font-bold mb-6"> Product List </h3>
