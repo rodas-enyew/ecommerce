@@ -1,3 +1,5 @@
+const Product = require("../models/productModel"); //importing the p
+
 //this function handles get /api/products
 const getAllProducts = (req, res)=> {
     const products = [
@@ -9,23 +11,34 @@ const getAllProducts = (req, res)=> {
         res.json(products); //sends JSON resp to frontend
 }
 
-const createProduct = (req, res)=> {
-  const {name, price}= req.body;
+//POST create new p in the DB 
+const createProduct = async (req, res)=> { 
+  try{
+    const { title, price, category, image, description } = req.body;
 
-  if(!name || !price){
-    return res.status(400).json({ message: "Name amd price are required."});
-  }
+    //checks if the req fiels are provided 
+    if (!title || !price || !category) {
+      return res.status(400).json({ message: "Titlem price and category are required."});
+    }
 
-  const newProduct = {
-    id: Date.now(), //usong current timestamps as unique id
-    name,
+    //create and save the p to the DB 
+  const product = await Product.create({
+    title,
     price,
-  };
+    category,
+    image,
+    description,
+  });
 
-  res.status(201).json(newProduct); //send newp with 201 status code
+  res.status(201).json(Product); //send newp with 201 status code
+
+} catch (error) {
+  //error handling 
+  res.status(500).json({ message: "sth went wrong", error: error.message});
 }
-
-module.exports = {
-  getAllProducts,
-  createProduct,
 };
+
+module.exports ={
+  getAllProducts,
+  createProduct
+}
