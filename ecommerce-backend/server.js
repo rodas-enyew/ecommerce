@@ -1,31 +1,21 @@
-require ("dotenv").config(); //lods env vars from env file
+// Load environment variables from .env file
+require('dotenv').config();
 
-//import express 
-const express = require("express"); //gives an easy way to create servers
-const mongoose = require("mongoose");
-const cors = require("cors");
-
-const productRoutes = require("./routes/productRoutes")
-
-//create express app
+// Import express
+const express = require('express');
 const app = express();
 
-//middleware
-app.use(cors({ origin: process.env.FRONTEND_URL}));
-app.use(express.json()); 
-//converts JSON into req.body since express doen;t understad it
+// Middleware to parse incoming JSON requests
+app.use(express.json());
 
-app.use("/api/products", productRoutes);  //routes for products
+// Import routes
+const productRoutes = require('./routes/productRoutes');
 
-mongoose.connect(process.env.MONGO_URI,{
-    useNewURParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log("mongoDB connected"))
-.catch((err)=> console.error("MongoDB connection error:", err));
+// Use routes - everything under /api/products goes to productRoutes
+app.use('/api/products', productRoutes);
 
-//start server
+// Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, ()=> {
-    console.log(`Server running on port ${PORT}`);
-})
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
