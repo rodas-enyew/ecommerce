@@ -1,3 +1,4 @@
+require("fotenv").config();
 const fetch = require("node-fetch"); // to fetch from external API
 const express = require("express");
 
