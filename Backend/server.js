@@ -1,39 +1,26 @@
-require("fotenv").config();
-const fetch = require("node-fetch"); // to fetch from external API
+require("dotenv").config();
 const express = require("express");
+const { fetchAccessToken, ensureToken } = require("./authentication");
+const { createPaymentIntent, getAllPaymentIntents } = require("./paymentIntent");
 
 const app = express();
 app.use(express.json());
 
-const EXTERNAL_API = "https://dummyjson.com/products"; // the external API
-
-// GET all products - proxy to external API
-app.get("/api/products", async (req, res) => {
+// Manual token route 
+app.post("/api/auth/token", async (req, res) => {
   try {
-    const response = await fetch(EXTERNAL_API);
-    const products = await response.json();
-    res.json(products);
-  } catch (error) {
-    res.status(500).json({ message: "Failed to fetch products", error: error.message });
+    const token = await fetchAccessToken();
+    res.json({ accessToken: token });
+  } catch {
+    res.status(500).json({ error: "Could not retrieve token" });
   }
 });
 
-// GET single product by id
-app.get("/api/products/:id", async (req, res) => {
-  try {
-    const productId = req.params.id;
-    const response = await fetch(`${EXTERNAL_API}/${productId}`);
-    if (!response.ok) {
-      return res.status(404).json({ message: "Product not found" });
-    }
-    const product = await response.json();
-    res.json(product);
-  } catch (error) {
-    res.status(500).json({ message: "Failed to fetch product", error: error.message });
-  }
-});
+// Create payment intent
+app.post("/api/payment-intent", ensureToken, createPaymentIntent);
+
+// Get all payment intents
+app.get("/api/payment-intents", ensureToken, getAllPaymentIntents);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
