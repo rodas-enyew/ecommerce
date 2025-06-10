@@ -11,22 +11,18 @@ const createPaymentIntent = async (req, res) => {
     const response = await axios.post(
       `${YAYA_API}/api/payment-intent`,
       {
-        amount,
-        currency,
-        customerPhone,
-        paymentMethod
-      },
-      {
         headers: {
           Authorization: `Bearer ${getToken()}`
         }
       }
     );
 
-    res.json(response.data);
+    res.status(200).json(response.data);
   } catch (error) {
-    console.error("Create payment intent error:", error.response?.data || error.message);
-    res.status(500).json({ error: "Failed to create payment intent." });
+    res.status(500).json({ 
+      sucess: false,
+      message: error.response?.data || "Failed to create payment intent."
+ });
   }
 };
 
