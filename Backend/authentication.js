@@ -5,7 +5,7 @@ const YAYA_API = "https://pay.yayawallet.com";
 
 const fetchAccessToken = async () => {
   try {
-    const response = await axios.post(`${YAYA_API}/api/auth/token`, {
+    const response = await axios.post(`https://pay.yayawallet.com/api/auth/token`, {
       clientId: process.env.YAYA_CLIENT_ID,
       clientSecret: process.env.YAYA_CLIENT_SECRET
     });
