@@ -18,7 +18,7 @@ const createProduct = async (req, res)=> {
 
     //checks if the req fiels are provided 
     if (!title || !price || !category) {
-      return res.status(400).json({ message: "Titlem price and category are required."});
+      return res.status(400).json({ message: "Title, price and category are required."});
     }
 
     //create and save the p to the DB 

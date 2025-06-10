@@ -4,10 +4,24 @@ import { useCart } from '../context/CartContext';
 const CartPage = () => {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
 
-  const handlePayNow = () => {
-    alert('Payment Successful! 🎊');
-    clearCart();
+  {/*const handleCheckout = async () => {
+    try {
+    const response = await fetch("http://localhost:5000/api/orders", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cart), //'cart' as your cart state
+    });
+
+    const data = await response.json();
+    console.log('Order response:', data);
+    alert('Order placed successfully!');
+  } catch (error) {
+    console.error('Error placing order:', error);
+    alert('Checkout failed');
   }
+}; */}
 
   const total = cart?.reduce((sum, item) => sum + item.price * item.quantity, 0) ?? 0;
 
@@ -70,7 +84,7 @@ const CartPage = () => {
           <div>
 
           <button
-            onClick={handlePayNow}
+            //onClick={handleCheckout}
             disabled={cart.length === 0}
             className={`px-5 py-2 ml-187 rounded-xl font-semibold transition ${
               cart.length === 0
@@ -78,7 +92,7 @@ const CartPage = () => {
                 : 'bg-green-500 hover:bg-green-600 text-white'
             }`}
           >
-            Pay Now
+            Checkout 
           </button> 
         </div>
         </div>
